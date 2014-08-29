@@ -4,8 +4,13 @@ var console = require("vertx/console");
 var userList = {};
 
 eventBus.registerHandler("chat.sendMessage", function(args) {
-    console.log("received: " + args);
-    eventBus.publish("chat.newMessage", args);
+    console.log("received: " + args.message + " " + args.UUID);
+    for (user in userList) {
+        if (userList[user] === args.UUID) {
+            eventBus.publish("chat.newMessage", user + ": "
+                + args.message);
+        }
+    }
 });
 
 eventBus.registerHandler("chat.loginUser", function(args, responder) {
