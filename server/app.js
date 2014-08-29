@@ -5,13 +5,15 @@ container.deployModule("io.vertx~mod-web-server~2.0.0-final", {
     port: 8080,
     bridge: true,
     inbound_permitted: [
-        { address: "chat.sendMessage" }
+        { address: "chat.sendMessage" },
+        { address: "chat.loginUser" }
     ],
     outbound_permitted: [
-        { address: "chat.newMessage" }
+        { address: "chat.newMessage" },
+        { address: "chat.newUser" },
     ]
 });
 
-container.deployVerticle("listen.js", function(err, res) {
-    console.log("listen.js deployed: " + res + " " + err);
+container.deployVerticle("chat.js", function(err, res) {
+    console.log("chat.js deployed: " + res + " " + err);
 });
