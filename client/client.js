@@ -39,4 +39,9 @@ eventBus.onopen = function() {
         $(".chatarea").append(args + "<br />");
         $("#message").val("");
     });
+
+    eventBus.registerHandler("chat.newUser", function(args) {
+        $(".chatarea").append("<font color=\"blue\"><b>" + args
+            + "</b> joined</font><br />");
+    });
 }

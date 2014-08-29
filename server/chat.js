@@ -32,12 +32,7 @@ eventBus.registerHandler("chat.loginUser", function(args, responder) {
         response.success = true;
         response.UUID = java.util.UUID.randomUUID().toString();
         userList[nickname] = response.UUID;
-        console.log("login OK");
-        console.log("new userList:");
-        for (user in userList) {
-            console.log(user + ":" + userList[user]);
-        }
+        eventBus.publish("chat.newUser", nickname);
         responder(response);
     }
-    eventBus.publish("chat.newUser", args);
 });
